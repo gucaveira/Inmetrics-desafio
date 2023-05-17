@@ -1,10 +1,13 @@
 package com.gustavo.rocha.core.domain.modal
 
+import com.google.gson.annotations.SerializedName
+
 data class UserGitHub (
     val login: String,
     val id: Long,
     val nodeID: String,
-    val avatarURL: String,
+    @SerializedName("avatar_url")
+    val avatarUrl: String,
     val gravatarID: String,
     val url: String,
     val htmlURL: String,
@@ -27,6 +30,7 @@ data class UserGitHub (
    // val hireable: Any? = null,
    // val bio: Any? = null,
     val twitterUsername: String,
+    @SerializedName("public_repos")
     val publicRepos: Long,
     val publicGists: Long,
     val followers: Long,
