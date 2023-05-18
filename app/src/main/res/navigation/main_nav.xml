@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/home">
+    app:startDestination="@id/usersFragment">
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.gustavo.rocha.inmetrics.ui.fragment.listUser.UsersListFragment"
+        android:label="fragment_item_list"
+        tools:layout="@layout/fragment_users_list" />
 
     <fragment
         android:id="@+id/home"

@@ -12,4 +12,8 @@ class UserGithubRepositoryImpl @Inject constructor(
     override suspend fun fetchUser(userNameLogin: String): UserGitHub {
         return inmetricsApi.fetchUser(userNameLogin)
     }
+
+    override suspend fun getUsers(): List<UserGitHub> {
+        return inmetricsApi.getUsers()
+    }
 }

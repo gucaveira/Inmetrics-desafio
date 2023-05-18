@@ -8,4 +8,7 @@ interface InmetricsApi {
 
     @GET("users/{userNameLogin}")
     suspend fun fetchUser(@Path("userNameLogin") userName: String): UserGitHub
+
+    @GET("/users")
+    suspend fun getUsers(): List<UserGitHub>
 }
