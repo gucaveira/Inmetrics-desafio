@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UserGitHub (
     val login: String,
+    @SerializedName("id")
     val id: Long,
     val nodeID: String,
     @SerializedName("avatar_url")
