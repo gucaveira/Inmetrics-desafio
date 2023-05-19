@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.gustavo.rocha.inmetrics.ui.fragment.listUser.UsersListFragment"
-        android:label="fragment_item_list"
+        android:label="Lista de usuário do GitHub"
         tools:layout="@layout/fragment_users_list">
 
         <action

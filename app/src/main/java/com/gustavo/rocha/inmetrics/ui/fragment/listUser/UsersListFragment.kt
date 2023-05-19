@@ -53,7 +53,6 @@ class UsersListFragment : Fragment() {
 
     private fun initAdapter() {
         usersListAdapter = UsersListAdapter(imageLoader) { userDetail, view ->
-            //val extras = FragmentNavigatorExtras(view to userDetail.login)
 
             val directions = UsersListFragmentDirections.actionUsersFragmentToDetailFragment(
                 userDetail.login,
@@ -63,7 +62,7 @@ class UsersListFragment : Fragment() {
             findNavController().navigate(directions)
         }
 
-        binding.list.run {
+        binding.recyclerView.run {
             setHasFixedSize(true)
             adapter = usersListAdapter
         }
