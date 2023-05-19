@@ -1,4 +1,4 @@
-package com.gustavo.rocha.inmetrics.ui.fragment.userdetail
+package com.gustavo.rocha.inmetrics.ui.fragment.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -8,29 +8,29 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.gustavo.rocha.inmetrics.databinding.FragmentUserDetailBinding
+import com.gustavo.rocha.inmetrics.databinding.FragmentDetailBinding
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
-import com.gustavo.rocha.inmetrics.ui.fragment.userdetail.viewmodel.UserDetailViewModel
+import com.gustavo.rocha.inmetrics.ui.fragment.detail.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserDetailFragment : Fragment() {
+class DetailFragment : Fragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val viewModel: UserDetailViewModel by viewModels()
+    private val viewModel: DetailViewModel by viewModels()
 
-    private var _binding: FragmentUserDetailBinding? = null
-    private val binding: FragmentUserDetailBinding get() = _binding!!
+    private var _binding: FragmentDetailBinding? = null
+    private val binding: FragmentDetailBinding get() = _binding!!
 
-    private val args by navArgs<UserDetailFragmentArgs>()
+    private val args by navArgs<DetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ) = FragmentUserDetailBinding.inflate(inflater, container, false).apply {
+    ) = FragmentDetailBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
 

@@ -1,4 +1,4 @@
-package com.gustavo.rocha.inmetrics.ui.fragment.userdetail.viewmodel
+package com.gustavo.rocha.inmetrics.ui.fragment.detail.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class UserDetailViewModel @Inject constructor(
+class DetailViewModel @Inject constructor(
     private val repository: UserGithubRepository,
 ) : ViewModel() {
 

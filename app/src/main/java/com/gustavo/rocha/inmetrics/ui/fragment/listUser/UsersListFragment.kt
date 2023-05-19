@@ -10,9 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gustavo.rocha.inmetrics.databinding.FragmentUsersListBinding
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
+import com.gustavo.rocha.inmetrics.ui.fragment.detail.DetailViewArg
 import com.gustavo.rocha.inmetrics.ui.fragment.listUser.adapter.UsersListAdapter
 import com.gustavo.rocha.inmetrics.ui.fragment.listUser.viewModel.UsersViewModel
-import com.gustavo.rocha.inmetrics.ui.fragment.userdetail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -55,7 +55,7 @@ class UsersListFragment : Fragment() {
         usersListAdapter = UsersListAdapter(imageLoader) { userDetail, view ->
             //val extras = FragmentNavigatorExtras(view to userDetail.login)
 
-            val directions = UsersListFragmentDirections.actionUsersFragmentToUserDetailFragment(
+            val directions = UsersListFragmentDirections.actionUsersFragmentToDetailFragment(
                 userDetail.login,
                 DetailViewArg(userDetail.login, userDetail.avatarUrl)
             )
