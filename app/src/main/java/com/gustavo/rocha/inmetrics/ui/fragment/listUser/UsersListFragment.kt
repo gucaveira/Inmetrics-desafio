@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import com.gustavo.rocha.inmetrics.databinding.FragmentUsersListBinding
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
 import com.gustavo.rocha.inmetrics.ui.fragment.detail.DetailViewArg
@@ -42,6 +44,7 @@ class UsersListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
+        observeInitialLoadState()
 
         lifecycleScope.launch {
             viewModel.usersPagingData(query = "").collect {
@@ -52,7 +55,7 @@ class UsersListFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        usersListAdapter = UsersListAdapter(imageLoader) { userDetail, view ->
+        usersListAdapter = UsersListAdapter(imageLoader) { userDetail ->
 
             val directions = UsersListFragmentDirections.actionUsersFragmentToDetailFragment(
                 userDetail.login,
@@ -67,4 +70,49 @@ class UsersListFragment : Fragment() {
             adapter = usersListAdapter
         }
     }
+
+    private fun observeInitialLoadState() {
+        lifecycleScope.launch {
+            usersListAdapter.loadStateFlow.collect { loadState ->
+                binding.flipperUsers.displayedChild = when (loadState.refresh) {
+                    is LoadState.Loading -> {
+                        setShimmerVisibility(true)
+                        FLIPPER_CHILD_LOADING
+                    }
+                    is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_USERS
+                    }
+                    is LoadState.Error -> {
+                        setShimmerVisibility(false)
+                        binding.includeViewErrorState.buttonRetry.setOnClickListener {
+                            usersListAdapter.retry()
+                        }
+                        FLIPPER_CHILD_ERROR
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setShimmerVisibility(visibility: Boolean) {
+        binding.includeViewUsersLoadingState.shimmerUsers.run {
+            isVisible = visibility
+            if (visibility) {
+                startShimmer()
+            } else stopShimmer()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_LOADING = 0
+        private const val FLIPPER_CHILD_USERS = 1
+        private const val FLIPPER_CHILD_ERROR = 2
+    }
+
 }

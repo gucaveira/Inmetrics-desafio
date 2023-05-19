@@ -12,5 +12,5 @@ import dagger.hilt.android.components.ViewModelComponent
 interface UseCaseModule {
 
     @Binds
-    fun bindGetCharactersUseCase(useCase: GetUsersListUseCaseParamsImpl): GetUsersListUseCase
+    fun bindGetUserListUseCase(useCase: GetUsersListUseCaseParamsImpl): GetUsersListUseCase
 }

@@ -24,7 +24,7 @@ class ViewHolder private constructor(
         imageLoader.load(imgAvatar, item.avatarUrl.plus(".png"))
 
         itemView.setOnClickListener {
-            onItemClickListener.invoke(item, it)
+            onItemClickListener.invoke(item)
         }
     }
 

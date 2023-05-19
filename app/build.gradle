@@ -40,7 +40,7 @@ android {
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -80,6 +80,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    // Other Libs
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     // Glide
     def glide_version = "4.13.2"
