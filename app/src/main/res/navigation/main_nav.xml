@@ -9,11 +9,25 @@
         android:id="@+id/usersFragment"
         android:name="com.gustavo.rocha.inmetrics.ui.fragment.listUser.UsersListFragment"
         android:label="fragment_item_list"
-        tools:layout="@layout/fragment_users_list" />
+        tools:layout="@layout/fragment_users_list">
+
+        <action
+            android:id="@+id/action_usersFragment_to_UserDetailFragment"
+            app:destination="@id/UserDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/UserDetailFragment"
         android:name="com.gustavo.rocha.inmetrics.ui.fragment.userdetail.UserDetailFragment"
+        android:label="{screenTitle}"
         tools:layout="@layout/fragment_user_detail">
+
+        <argument
+            android:name="screenTitle"
+            app:argType="string" />
+
+        <argument
+            android:name="detailViewArg"
+            app:argType="com.gustavo.rocha.inmetrics.ui.fragment.userdetail.DetailViewArg" />
     </fragment>
 </navigation>

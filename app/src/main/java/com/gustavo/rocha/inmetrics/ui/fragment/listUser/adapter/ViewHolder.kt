@@ -1,7 +1,6 @@
 package com.gustavo.rocha.inmetrics.ui.fragment.listUser.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gustavo.rocha.core.domain.modal.UserGitHub
 import com.gustavo.rocha.inmetrics.databinding.ItemUserBinding
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
+import com.gustavo.rocha.inmetrics.util.OnItemClickListener
 
 class ViewHolder private constructor(
     binding: ItemUserBinding,
     private val imageLoader: ImageLoader,
-    private val onItemClickListener: (view: View) -> Unit,
+    private val onItemClickListener: OnItemClickListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val imgAvatar: ImageView = binding.imgAvatar
@@ -24,7 +24,7 @@ class ViewHolder private constructor(
         imageLoader.load(imgAvatar, item.avatarUrl.plus(".png"))
 
         itemView.setOnClickListener {
-            onItemClickListener.invoke(it)
+            onItemClickListener.invoke(item, it)
         }
     }
 
@@ -32,7 +32,7 @@ class ViewHolder private constructor(
         fun create(
             parent: ViewGroup,
             imageLoader: ImageLoader,
-            onItemClickListener: (view: View) -> Unit,
+            onItemClickListener: OnItemClickListener,
         ): ViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val itemBinding = ItemUserBinding.inflate(inflater, parent, false)

@@ -2,7 +2,8 @@ package com.gustavo.rocha.core.domain.modal
 
 import com.google.gson.annotations.SerializedName
 
-data class UserGitHub (
+data class UserGitHub(
+    @SerializedName("login")
     val login: String,
     @SerializedName("id")
     val id: Long,
@@ -26,10 +27,10 @@ data class UserGitHub (
     val name: String,
     //val company: Any? = null,
     val blog: String,
-   // val location: Any? = null,
-   // val email: Any? = null,
-   // val hireable: Any? = null,
-   // val bio: Any? = null,
+    // val location: Any? = null,
+    // val email: Any? = null,
+    // val hireable: Any? = null,
+    // val bio: Any? = null,
     val twitterUsername: String,
     @SerializedName("public_repos")
     val publicRepos: Long,
@@ -37,5 +38,5 @@ data class UserGitHub (
     val followers: Long,
     val following: Long,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
 )

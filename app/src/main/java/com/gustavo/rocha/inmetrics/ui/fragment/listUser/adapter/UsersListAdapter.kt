@@ -1,16 +1,16 @@
 package com.gustavo.rocha.inmetrics.ui.fragment.listUser.adapter
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.gustavo.rocha.core.domain.modal.UserGitHub
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
+import com.gustavo.rocha.inmetrics.util.OnItemClickListener
 import javax.inject.Inject
 
 class UsersListAdapter @Inject constructor(
     private val imageLoader: ImageLoader,
-    private val onItemClickListener: (view: View) -> Unit,
+    private val onItemClickListener: OnItemClickListener,
 ) : PagingDataAdapter<UserGitHub, ViewHolder>(differCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
