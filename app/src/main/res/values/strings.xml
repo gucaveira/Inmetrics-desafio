@@ -2,4 +2,5 @@
     <string name="app_name">Inmetrics</string>
     <string name="error_loading_data">Erro ao carregar os dados</string>
     <string name="common_try_again">Tente de novo</string>
+    <string name="common_no_results_found">No results found</string>
 </resources>
