@@ -69,7 +69,7 @@ class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
             }
         }
 
-        viewModel.searchCharacters()
+        viewModel.searchUser()
     }
 
     private fun initAdapter() {
@@ -153,7 +153,7 @@ class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
     override fun onQueryTextSubmit(query: String?): Boolean {
         return query?.let {
             viewModel.currentSearchQuery = it
-            viewModel.searchCharacters()
+            viewModel.searchUser()
             true
         } ?: false
     }
@@ -168,7 +168,7 @@ class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
 
     override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
         viewModel.closeSearch()
-        viewModel.searchCharacters()
+        viewModel.searchUser()
         return true
     }
 

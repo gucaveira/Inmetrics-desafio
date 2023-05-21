@@ -90,4 +90,7 @@ dependencies {
 
     // Paging3
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    // Unit tests
+    testImplementation project(":testing")
 }

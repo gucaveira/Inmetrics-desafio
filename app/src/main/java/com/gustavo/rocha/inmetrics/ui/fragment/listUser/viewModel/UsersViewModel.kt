@@ -38,7 +38,7 @@ class UsersViewModel @Inject constructor(
 
     private fun getPageConfig() = PagingConfig(pageSize = 10)
 
-    fun searchCharacters() {
+    fun searchUser() {
         action.value = Action.Search
     }
 
