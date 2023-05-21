@@ -1,4 +1,4 @@
-package com.gustavo.rocha.core.base
+package com.gustavo.rocha.core.usecase.base
 
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,5 +1,7 @@
 package com.gustavo.rocha.inmetrics.di
 
+import com.gustavo.rocha.core.usecase.FetchReposUseCase
+import com.gustavo.rocha.core.usecase.FetchReposUseCaseImpl
 import com.gustavo.rocha.core.usecase.GetUsersListUseCase
 import com.gustavo.rocha.core.usecase.GetUsersListUseCaseParamsImpl
 import dagger.Binds
@@ -13,4 +15,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetUserListUseCase(useCase: GetUsersListUseCaseParamsImpl): GetUsersListUseCase
+
+    @Binds
+    fun bindFetchReposUseCase(useCase: FetchReposUseCaseImpl): FetchReposUseCase
 }

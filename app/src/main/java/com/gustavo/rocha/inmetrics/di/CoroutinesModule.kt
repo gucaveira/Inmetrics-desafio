@@ -1,7 +1,7 @@
 package com.gustavo.rocha.inmetrics.di
 
-import com.gustavo.rocha.core.base.AppCoroutinesDispatchers
-import com.gustavo.rocha.core.base.CoroutinesDispatchers
+import com.gustavo.rocha.core.usecase.base.AppCoroutinesDispatchers
+import com.gustavo.rocha.core.usecase.base.CoroutinesDispatchers
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

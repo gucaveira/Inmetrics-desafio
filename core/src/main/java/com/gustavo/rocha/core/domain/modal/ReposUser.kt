@@ -1,14 +1,18 @@
 package com.gustavo.rocha.core.domain.modal
 
-data class ReposUser (
+import com.google.gson.annotations.SerializedName
+
+data class ReposUser(
     val id: Long,
     val nodeID: String,
     val name: String,
     val fullName: String,
     val private: Boolean,
     val owner: UserGitHub,
+    @SerializedName("html_url")
     val htmlURL: String,
-    val description: String,
+    @SerializedName("description")
+    val description: String?,
     val fork: Boolean,
     val url: String,
     val forksURL: String,
@@ -79,5 +83,5 @@ data class ReposUser (
     val forks: Long,
     val openIssues: Long,
     val watchers: Long,
-    val defaultBranch: String
+    val defaultBranch: String,
 )

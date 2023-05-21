@@ -9,9 +9,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.gustavo.rocha.core.base.CoroutinesDispatchers
 import com.gustavo.rocha.core.domain.modal.UserGitHub
 import com.gustavo.rocha.core.usecase.GetUsersListUseCase
+import com.gustavo.rocha.core.usecase.base.CoroutinesDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.map
