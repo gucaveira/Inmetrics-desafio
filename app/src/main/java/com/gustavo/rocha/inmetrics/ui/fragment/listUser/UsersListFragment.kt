@@ -2,14 +2,21 @@ package com.gustavo.rocha.inmetrics.ui.fragment.listUser
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.gustavo.rocha.inmetrics.R
 import com.gustavo.rocha.inmetrics.databinding.FragmentUsersListBinding
 import com.gustavo.rocha.inmetrics.imageLoader.ImageLoader
 import com.gustavo.rocha.inmetrics.ui.fragment.detail.DetailViewArg
@@ -20,7 +27,8 @@ import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UsersListFragment : Fragment() {
+class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener,
+    MenuItem.OnActionExpandListener {
 
     private var _binding: FragmentUsersListBinding? = null
     private val binding: FragmentUsersListBinding get() = _binding!!
@@ -31,6 +39,8 @@ class UsersListFragment : Fragment() {
     private val viewModel: UsersViewModel by viewModels()
 
     private lateinit var usersListAdapter: UsersListAdapter
+
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +56,20 @@ class UsersListFragment : Fragment() {
         initAdapter()
         observeInitialLoadState()
 
-        lifecycleScope.launch {
-            viewModel.usersPagingData(query = "").collect {
-                usersListAdapter.submitData(it)
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        viewModel.state.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UsersViewModel.UiState.SearchResult -> {
+                    lifecycleScope.launch {
+                        usersListAdapter.submitData(uiState.data)
+                    }
+                }
             }
         }
 
+        viewModel.searchCharacters()
     }
 
     private fun initAdapter() {
@@ -102,6 +120,56 @@ class UsersListFragment : Fragment() {
                 startShimmer()
             } else stopShimmer()
         }
+    }
+
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            else -> false
+        }
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.users_menu_items, menu)
+
+        val searchItem = menu.findItem(R.id.menu_search)
+        searchView = searchItem.actionView as SearchView
+
+        searchItem.setOnActionExpandListener(this)
+
+        if (viewModel.currentSearchQuery.isNotEmpty()) {
+            searchItem.expandActionView()
+            searchView.setQuery(viewModel.currentSearchQuery, false)
+        }
+
+        searchView.run {
+
+            isSubmitButtonEnabled = true
+
+            setOnQueryTextListener(this@UsersListFragment)
+        }
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return query?.let {
+            viewModel.currentSearchQuery = it
+            viewModel.searchCharacters()
+            true
+        } ?: false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
+    }
+
+    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+        return true
+    }
+
+    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+        viewModel.closeSearch()
+        viewModel.searchCharacters()
+        return true
     }
 
     override fun onDestroyView() {
