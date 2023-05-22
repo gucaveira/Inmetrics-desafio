@@ -1,0 +1,17 @@
+package com.gustavo.rocha.inmetrics.di
+
+import com.gustavo.rocha.inmetrics.BuildConfig
+import com.gustavo.rocha.inmetrics.di.qualifier.BaseUrl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+
+@Module
+@InstallIn(SingletonComponent::class)
+object BaseUrlModule {
+
+    @BaseUrl
+    @Provides
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
+}

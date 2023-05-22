@@ -11,7 +11,7 @@
         layout="@layout/include_view_users_loading_state" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/usersRecyclerView"
         android:name="com.gustavo.rocha.inmetrics.ui.fragment.listUser.UsersFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

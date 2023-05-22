@@ -83,7 +83,7 @@ class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
             findNavController().navigate(directions)
         }
 
-        binding.recyclerView.run {
+        binding.usersRecyclerView.run {
             setHasFixedSize(true)
             adapter = usersListAdapter
         }

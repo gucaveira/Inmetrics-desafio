@@ -1,6 +1,7 @@
 package com.gustavo.rocha.inmetrics.di
 
 import com.gustavo.rocha.inmetrics.BuildConfig
+import com.gustavo.rocha.inmetrics.di.qualifier.BaseUrl
 import com.gustavo.rocha.inmetrics.network.InmetricsApi
 import dagger.Module
 import dagger.Provides
@@ -43,10 +44,11 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory
+        converterFactory: GsonConverterFactory,
+        @BaseUrl baseUrl: String,
     ): InmetricsApi {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
