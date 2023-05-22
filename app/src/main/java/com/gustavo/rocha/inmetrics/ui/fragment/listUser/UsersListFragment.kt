@@ -1,5 +1,7 @@
 package com.gustavo.rocha.inmetrics.ui.fragment.listUser
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -7,6 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
@@ -150,10 +153,17 @@ class UsersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
         }
     }
 
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
-        return query?.let {
-            viewModel.currentSearchQuery = it
+        return query?.let { text ->
+            viewModel.currentSearchQuery = text
             viewModel.searchUser()
+            view?.let { activity?.hideKeyboard(it) }
             true
         } ?: false
     }

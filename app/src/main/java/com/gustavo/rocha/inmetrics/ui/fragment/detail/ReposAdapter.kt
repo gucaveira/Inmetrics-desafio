@@ -25,8 +25,10 @@ class ReposAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(reposUser: ReposUser) {
-            binding.txtNameRepos.text = "Nome do projeto: " + "${reposUser.htmlURL}"
-            binding.txtDescription.text = "Descrição: " + "${reposUser.description}"
+            binding.txtNameRepos.text = reposUser.htmlURL
+            reposUser.description?.let {
+                binding.txtDescription.text = "Descrição: " + "${reposUser.description}"
+            }
         }
 
         companion object {
